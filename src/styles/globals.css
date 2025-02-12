@@ -19,3 +19,11 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.border {
+  @apply border-black border-r-2 border-b-2 border-l-gray-50 border-l-2 border-t-gray-50 border-t-2;
+}
+
+.btn {
+  @apply hover:cursor-pointer border-black hover:border-gray-50 border-r-2 border-b-2 border-l-gray-50 hover:border-l-black border-l-2 border-t-gray-50 hover:border-t-black border-t-2 duration-100 ease-in;
+}
