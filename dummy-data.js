@@ -115,12 +115,18 @@ export function getFeaturedEvents() {
 }
 
 export function getEventById(id) {
-  // let sevent = null;
-  // DUMMY_EVENTS.map((event) => {
-  //   if (event.id === id) {
-  //     sevent = event;
-  //   }
-  // });
-  // return sevent;
-  return DUMMY_EVENTS.filter(event => event.id === id)[0]
+  return DUMMY_EVENTS.filter((event) => event.id === id)[0];
+}
+
+export function getAllEvents() {
+  return DUMMY_EVENTS;
+}
+
+export function getFilteredEvents(searchParam) {
+  const { year, month } = searchParam;
+
+  return DUMMY_EVENTS.filter((event) => {
+    const date = new Date(event.date);
+    return date.getFullYear() === year && date.getMonth() + 1 === month;
+  })
 }
