@@ -10,9 +10,10 @@
     "build-css": "npx tailwindcss -i ./src/styles/globals.css -o ./src/output.css --watch"
   },
   "dependencies": {
+    "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.1.6"
+    "swr": "^2.3.2"
   },
   "devDependencies": {
     "postcss": "^8",

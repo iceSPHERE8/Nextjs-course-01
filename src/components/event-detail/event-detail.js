@@ -1,12 +1,22 @@
+import Image from "next/image";
+
 export default function EventDetail(props) {
   const { title, image, description, date, location } = props;
 
   return (
     <>
       <div className="p-8">
-        <img
+        {/* <img
           src={image}
           alt={title}
+          className="w-full h-[480px] object-cover object-center border"
+        /> */}
+        <Image
+          src={image}
+          alt={title}
+          width={1200}
+          height={480}
+          priority={true}
           className="w-full h-[480px] object-cover object-center border"
         />
         <div className="bg-gray-50 flex p-8 w-full border mt-8">
