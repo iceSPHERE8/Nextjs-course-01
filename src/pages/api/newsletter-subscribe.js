@@ -19,6 +19,7 @@ export default async function handler(req, res) {
           console.log("already exist:", email);
           return;
         }
+
         await collection.insertOne({ email: email });
       } catch {
         console.error(error);

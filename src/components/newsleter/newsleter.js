@@ -1,10 +1,20 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+
+import NotificationContext from "../../../store/notification-context";
 
 export default function Newsletter() {
   const emailInputRef = useRef();
 
+  const notificationCtx = useContext(NotificationContext);
+
   const newsletterHandler = (event) => {
     event.preventDefault();
+
+    notificationCtx.showNotification({
+      title: "Subscribe...",
+      text: "Wait a moment.",
+      status: "pending",
+    });
 
     if (emailInputRef.current) {
       fetch("/api/newsletter-subscribe", {
@@ -14,8 +24,29 @@ export default function Newsletter() {
         },
         body: JSON.stringify({ email: emailInputRef.current.value }),
       })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+
+          return response.json().then((data) => {
+            throw new Error(data.message || 'Something went wrong.')
+          })
+        })
+        .then((data) => {
+          notificationCtx.showNotification({
+            title: "Success",
+            text: "Thanks for your subscribe.",
+            status: "success",
+          });
+        })
+        .catch((error) => {
+          notificationCtx.showNotification({
+            title: "Error",
+            text: error.message || "Something went wrong.",
+            status: "error",
+          });
+        });
     }
   };
 
